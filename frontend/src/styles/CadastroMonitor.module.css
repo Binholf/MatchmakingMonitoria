@@ -1,0 +1,143 @@
+.cadastro-page {
+  min-height: 100vh;
+  width: 100vw;
+  background-color: #e6eff6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.cadastro-card {
+  background-color: #f8f9fb;
+  padding: 4rem 5rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 650px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.cadastro-icon {
+  background-color: #dbf3e2;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 1.5rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.cadastro-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #27ae60;
+  margin-bottom: 0.5rem;
+}
+
+.cadastro-subtitle {
+  font-size: 1rem;
+  font-weight: normal;
+  color: #2c3e50;
+  margin-bottom: 2rem;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  border: 1px solid #c8d8e4;
+  border-radius: 10px;
+  background-color: white;
+  padding: 0.9rem 1.2rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-group:focus-within {
+  border-color: #27ae60;
+  box-shadow: 0 0 5px rgba(39, 174, 96, 0.2);
+}
+
+.input-icon {
+  color: #27ae60;
+  margin-right: 0.8rem;
+  font-size: 1.3rem;
+}
+
+.input-field {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 1rem;
+  background: transparent;
+  color: #333;
+}
+
+.button-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem; /* espaçamento entre os botões */
+  margin-top: 4rem;
+}
+
+.cadastro-button {
+  background-color: #27ae60; /* verde */
+  color: white;
+  border: none;
+  padding: 1rem 2rem; /* botão maior */
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  flex: 2; /* ocupa mais espaço */
+}
+
+.cadastro-button:hover {
+  background-color: #1e8449;
+}
+
+.cancel-button {
+  background-color: #e74c3c; /* vermelho */
+  color: white;
+  border: none;
+  padding: 1rem 1.2rem; /* botão menor */
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  flex: 1;
+  transition: background-color 0.2s;
+}
+
+.cancel-button:hover {
+  background-color: #c0392b;
+}
+
+.error-text {
+  color: #ff4d4f;
+  font-size: 0.85rem;
+  margin-top: -0.8rem;
+  margin-bottom: 0.8rem;
+  text-align: left;
+}
+
+@media (max-width: 768px) {
+  .cadastro-card {
+    padding: 2rem 3rem;
+    width: 100%;
+  }
+
+  .cadastro-title {
+    font-size: 1.5rem;
+  }
+
+  .cadastro-icon {
+    width: 80px;
+    height: 80px;
+  }
+}

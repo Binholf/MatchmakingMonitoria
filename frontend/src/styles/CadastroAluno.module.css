@@ -1,0 +1,141 @@
+/* Tela inteira, centralizado vertical e horizontal */
+.cadastro-page {
+  min-height: 100vh;
+  width: 100vw;
+  background-color: #e6eff6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+/* Card principal */
+.cadastro-card {
+  background-color: #f8f9fb;
+  padding: 4rem 5rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 650px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+/* Título e subtítulo */
+.cadastro-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #4a90e2;
+  margin-bottom: 0.5rem;
+}
+
+.cadastro-subtitle {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+/* Campos de entrada */
+.input-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  border: 1px solid #c8d8e4;
+  border-radius: 10px;
+  background-color: white;
+  padding: 0.9rem 1.2rem;
+  transition: border-color 0.2s;
+}
+
+.input-group:focus-within {
+  border-color: #4a90e2;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.2);
+}
+
+.input-field {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 1rem;
+  background: transparent;
+  color: #333;
+}
+
+/* Linha de botões lado a lado */
+.button-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* Botão de cadastro */
+.cadastro-button {
+  flex: 1.5; /* Maior */
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.cadastro-button:hover {
+  background-color: #3c7cc4;
+}
+
+.cadastro-button:active {
+  transform: scale(0.98);
+}
+
+/* Botão de cancelar */
+.cancel-button {
+  flex: 1;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.cancel-button:hover {
+  background-color: #c0392b;
+}
+
+.cancel-button:active {
+  transform: scale(0.98);
+}
+
+/* Mensagens de erro */
+.error-text {
+  color: #ff4d4f;
+  font-size: 0.85rem;
+  margin-top: -0.8rem;
+  margin-bottom: 0.8rem;
+  text-align: left;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .cadastro-card {
+    padding: 2rem 3rem;
+    width: 100%;
+  }
+
+  .cadastro-title {
+    font-size: 1.5rem;
+  }
+
+  .cadastro-subtitle {
+    font-size: 0.9rem;
+  }
+}
