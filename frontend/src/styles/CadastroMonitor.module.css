@@ -126,6 +126,17 @@
   text-align: left;
 }
 
+.disciplinas-list {
+  display: flex;
+  flex-direction: column; /* uma embaixo da outra */
+  gap: 0.3rem; /* espaçamento */
+}
+
+.disciplina-item {
+  color: black; /* letras pretas */
+  font-size: 1rem;
+}
+
 @media (max-width: 768px) {
   .cadastro-card {
     padding: 2rem 3rem;

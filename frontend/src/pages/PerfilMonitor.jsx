@@ -8,14 +8,26 @@ import styles from "../styles/CadastroMonitor.module.css";
 
 export default function PerfilMonitor() {
   const navigate = useNavigate();
-  const [user, setUser] = useState({ especialidade: "", experiencia: "", preco_hora: "" });
+  const [userData, setUserData] = useState({
+    name: "",
+    email: "",
+    especialidade: "",
+    experiencia: "",
+    preco_hora: "",
+  });
   const [editing, setEditing] = useState(false);
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
         const { data } = await api.get("/monitor/me");
-        setUser(data);
+        setUserData({
+          name: data.user.name,
+          email: data.user.email,
+          especialidade: data.especialidade,
+          experiencia: data.experiencia,
+          preco_hora: data.preco_hora,
+        });
       } catch {
         navigate("/login");
       }
@@ -24,12 +36,17 @@ export default function PerfilMonitor() {
   }, [navigate]);
 
   const handleChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    setUserData({ ...userData, [e.target.name]: e.target.value });
   };
 
   const handleSave = async () => {
     try {
-      await api.put("/monitor/me", user);
+      await api.put("/monitor/me", {
+        name: userData.name,
+        especialidade: userData.especialidade,
+        experiencia: userData.experiencia,
+        preco_hora: userData.preco_hora,
+      });
       toast.success("Perfil atualizado!");
       setEditing(false);
     } catch {
@@ -38,14 +55,50 @@ export default function PerfilMonitor() {
   };
 
   const handleDelete = async () => {
-    if (!window.confirm("Tem certeza que deseja excluir seu perfil?")) return;
-    try {
-      await api.delete("/monitor/me");
-      toast.success("Perfil excluído!");
-      setTimeout(() => navigate("/home"), 1500);
-    } catch {
-      toast.error("Erro ao excluir perfil.");
-    }
+    const DeleteConfirm = () => (
+      <div>
+        <p>Tem certeza que deseja excluir seu perfil?</p>
+        <div style={{ display: "flex", gap: "0.5rem", marginTop: "0.5rem" }}>
+          <button
+            onClick={async () => {
+              toast.dismiss();
+              try {
+                await api.delete("/monitor/me");
+                toast.success("Perfil excluído!");
+                setTimeout(() => navigate("/home"), 1500);
+              } catch {
+                toast.error("Erro ao excluir perfil.");
+              }
+            }}
+            style={{
+              backgroundColor: "#27ae60",
+              color: "white",
+              padding: "0.3rem 0.6rem",
+              borderRadius: "5px",
+              border: "none",
+              cursor: "pointer",
+            }}
+          >
+            Confirmar
+          </button>
+          <button
+            onClick={() => toast.dismiss()}
+            style={{
+              backgroundColor: "#ccc",
+              color: "#333",
+              padding: "0.3rem 0.6rem",
+              borderRadius: "5px",
+              border: "none",
+              cursor: "pointer",
+            }}
+          >
+            Cancelar
+          </button>
+        </div>
+      </div>
+    );
+
+    toast.info(<DeleteConfirm />, { autoClose: false, closeOnClick: false });
   };
 
   return (
@@ -56,10 +109,31 @@ export default function PerfilMonitor() {
 
         <div className={styles["input-group"]}>
           <input
+            name="name"
+            placeholder="Nome"
+            className={styles["input-field"]}
+            value={userData.name}
+            onChange={handleChange}
+            disabled={!editing}
+          />
+        </div>
+
+        <div className={styles["input-group"]}>
+          <input
+            name="email"
+            placeholder="E-mail"
+            className={styles["input-field"]}
+            value={userData.email}
+            disabled
+          />
+        </div>
+
+        <div className={styles["input-group"]}>
+          <input
             name="especialidade"
             placeholder="Especialidade"
             className={styles["input-field"]}
-            value={user.especialidade}
+            value={userData.especialidade}
             onChange={handleChange}
             disabled={!editing}
           />
@@ -70,7 +144,7 @@ export default function PerfilMonitor() {
             name="experiencia"
             placeholder="Experiência"
             className={styles["input-field"]}
-            value={user.experiencia}
+            value={userData.experiencia}
             onChange={handleChange}
             disabled={!editing}
           />
@@ -81,7 +155,7 @@ export default function PerfilMonitor() {
             name="preco_hora"
             placeholder="Preço por hora"
             className={styles["input-field"]}
-            value={user.preco_hora}
+            value={userData.preco_hora}
             onChange={handleChange}
             disabled={!editing}
           />
@@ -101,7 +175,7 @@ export default function PerfilMonitor() {
             </button>
           )}
           <button
-            style={{ backgroundColor: "#27ae60", flex: 1 }}
+            style={{ backgroundColor: "#ae3027ff", flex: 1 }}
             className={styles["cadastro-button"]}
             onClick={handleDelete}
           >

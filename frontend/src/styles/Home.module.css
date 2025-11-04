@@ -137,6 +137,39 @@
   color: #ddb207; 
 }
 
+.page-content {
+  padding: 20px;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #4b0082;
+}
+
+.monitor-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 500px;
+  text-align: left;
+  color: black;
+}
+
+.monitor-item {
+  background: #f8f8ff;
+  padding: 10px 15px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.disciplinas-text {
+  font-size: 0.9rem;
+  color: #555;
+}
+
 
 /* Responsividade */
 @media (max-width: 1024px) {

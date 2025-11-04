@@ -1,25 +1,44 @@
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import { logout, getMe } from "../services/auth";
 import { useEffect, useState } from "react";
-import styles from "../styles/Home.module.css"; // CSS Modules
+import styles from "../styles/Home.module.css";
+import api from "../services/api";
 
 export default function AlunoPage() {
   const navigate = useNavigate();
   const [user, setUser] = useState({ name: "" });
+  const [recomendacoes, setRecomendacoes] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchUser = async () => {
+    const fetchData = async () => {
       try {
-        const data = await getMe();
-        setUser(data);
-      } catch {
-        navigate("/login");
+        // 1️⃣ Pega o usuário autenticado
+        const usuario = await getMe();
+        setUser(usuario);
+
+        // 2️⃣ Busca o aluno vinculado a esse usuário
+        const alunoRes = await api.get(`/aluno/usuario/${usuario.id}`);
+        const aluno = alunoRes.data;
+
+        if (!aluno || !aluno.id) {
+          console.error("Aluno não encontrado para o usuário logado");
+          navigate("/login");
+          return;
+        }
+
+        // 3️⃣ Agora busca os matches com base no ID do aluno
+        const res = await api.get(`/match/${aluno.id}`);
+        setRecomendacoes(res.data);
+      } catch (error) {
+        console.error("Erro ao carregar dados:", error);
+        //navigate("/login");
       } finally {
         setLoading(false);
       }
     };
-    fetchUser();
+
+    fetchData();
   }, [navigate]);
 
   const handleLogout = () => {
@@ -31,7 +50,7 @@ export default function AlunoPage() {
     navigate("/perfil-aluno");
   };
 
-  if (loading) return <p className={styles["text-center"]}>Carregando...</p>;
+  if (loading) return <p>Carregando...</p>;
 
   return (
     <div className={styles["home-page"]}>
@@ -49,8 +68,25 @@ export default function AlunoPage() {
         </button>
       </header>
 
-      <div className={styles["page-empty"]}>
-        {/* Conteúdo vazio, só o header */}
+      <div className={styles["page-content"]}>
+        <h2 className={styles["section-title"]}>Monitores recomendados</h2>
+
+        {recomendacoes.length === 0 ? (
+          <p>Nenhum monitor recomendado encontrado.</p>
+        ) : (
+          <ul className={styles["monitor-list"]}>
+            {recomendacoes.map((monitor) => (
+              <li key={monitor.monitor_id} className={styles["monitor-item"]}>
+                <strong>{monitor.monitor_nome}</strong> —{" "}
+                {monitor.compatibilidade} de compatibilidade
+                <br />
+                <span className={styles["disciplinas-text"]}>
+                  Disciplinas em comum: {monitor.disciplinas_em_comum}
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );

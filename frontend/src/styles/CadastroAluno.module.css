@@ -124,6 +124,22 @@
   text-align: left;
 }
 
+
+.disciplinas-container {
+  padding: 8px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  color: black;
+}
+
+.disciplina-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
   .cadastro-card {
