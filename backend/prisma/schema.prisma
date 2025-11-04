@@ -19,20 +19,76 @@ model User {
 }
 
 model Aluno {
-  id            Int      @id @default(autoincrement())
-  usuario_id    Int      @unique
-  area_interesse String
-  descricao      String
-  user           User     @relation(fields: [usuario_id], references: [id])
+  id             Int              @id @default(autoincrement())
+  usuario_id     Int              @unique
+  area_interesse String?
+  descricao      String?
+  user           User             @relation(fields: [usuario_id], references: [id])
+
+  cursos         AlunoCurso[]
+  disciplinas    AlunoDisciplina[]
 }
 
 model Monitor {
-  id            Int      @id @default(autoincrement())
-  usuario_id    Int      @unique
-  especialidade String
-  experiencia   String
-  preco_hora    Float
-  user          User     @relation(fields: [usuario_id], references: [id])
+  id             Int              @id @default(autoincrement())
+  usuario_id     Int              @unique
+  especialidade  String?
+  experiencia    String?
+  preco_hora     Float?
+  user           User             @relation(fields: [usuario_id], references: [id])
+
+  cursos         MonitorCurso[]
+  disciplinas    MonitorDisciplina[]
 }
 
+model Curso {
+  id          Int            @id @default(autoincrement())
+  nome        String
+  descricao   String?
+  disciplinas Disciplina[]
+  alunos      AlunoCurso[]
+  monitores   MonitorCurso[]
+}
 
+model Disciplina {
+  id          Int                   @id @default(autoincrement())
+  nome        String
+  descricao   String?
+  curso_id    Int
+  curso       Curso                 @relation(fields: [curso_id], references: [id])
+
+  alunos      AlunoDisciplina[]
+  monitores   MonitorDisciplina[]
+}
+
+model AlunoCurso {
+  id        Int    @id @default(autoincrement())
+  aluno_id  Int
+  curso_id  Int
+  aluno     Aluno  @relation(fields: [aluno_id], references: [id])
+  curso     Curso  @relation(fields: [curso_id], references: [id])
+}
+
+model MonitorCurso {
+  id         Int      @id @default(autoincrement())
+  monitor_id Int
+  curso_id   Int
+  monitor    Monitor  @relation(fields: [monitor_id], references: [id])
+  curso      Curso    @relation(fields: [curso_id], references: [id])
+}
+
+model AlunoDisciplina {
+  id             Int         @id @default(autoincrement())
+  aluno_id       Int
+  disciplina_id  Int
+  aluno          Aluno       @relation(fields: [aluno_id], references: [id])
+  disciplina     Disciplina  @relation(fields: [disciplina_id], references: [id])
+}
+
+model MonitorDisciplina {
+  id              Int         @id @default(autoincrement())
+  monitor_id      Int
+  disciplina_id   Int
+  monitor         Monitor     @relation(fields: [monitor_id], references: [id])
+  disciplina      Disciplina  @relation(fields: [disciplina_id], references: [id])
+}

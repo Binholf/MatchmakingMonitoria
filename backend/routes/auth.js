@@ -8,6 +8,7 @@ import verificaToken from "../middlewares/verifyToken.js";
 const router = express.Router();
 const prisma = new PrismaClient();
 
+// ✅ Registro de usuário
 router.post("/register", async (req, res) => {
   const { name, email, password } = req.body;
   try {
@@ -35,6 +36,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
+// ✅ Login de usuário
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -80,28 +82,26 @@ router.get("/me", verificaToken, async (req, res) => {
   }
 });
 
-// Rota para retornar dados do aluno logado
-router.get("/aluno/me", async (req, res) => {
+// ✅ Verifica se o token JWT ainda é válido
+router.get("/check", verificaToken, async (req, res) => {
   try {
-    const userId = req.user.id; 
-    const aluno = await db.aluno.findUnique({ where: { userId } });
-    if (!aluno) return res.status(404).json({ error: "Aluno não encontrado" });
-    res.json(aluno);
-  } catch (err) {
-    res.status(500).json({ error: "Erro ao buscar aluno" });
+    // Busca o usuário logado com base no token
+    const user = await prisma.user.findUnique({
+      where: { id: req.user.id },
+      select: { id: true, name: true, email: true },
+    });
+
+    if (!user) {
+      return res.status(404).json({ autenticado: false, error: "Usuário não encontrado" });
+    }
+
+    // Tudo certo — usuário autenticado
+    return res.json({ autenticado: true, user });
+  } catch (error) {
+    console.error("Erro ao verificar autenticação:", error);
+    return res.status(500).json({ autenticado: false, error: "Erro ao verificar autenticação" });
   }
 });
 
-// Rota para retornar dados do monitor logado
-router.get("/monitor/me", async (req, res) => {
-  try {
-    const userId = req.user.id; 
-    const monitor = await db.monitor.findUnique({ where: { userId } });
-    if (!monitor) return res.status(404).json({ error: "Monitor não encontrado" });
-    res.json(monitor);
-  } catch (err) {
-    res.status(500).json({ error: "Erro ao buscar monitor" });
-  }
-});
 
 export default router;
