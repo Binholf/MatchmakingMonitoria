@@ -1,6 +1,6 @@
 .home-page {
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
   background-color: #e6eff6;
   display: flex;
   flex-direction: column;
@@ -107,7 +107,7 @@
 }
 
 .monitor-card {
-  border-top: 6px solid #2ecc71;
+  border-top: 6px solid #4b0082; /* roxo para o cartão 'Sou Monitor' */
 
 }
 
@@ -143,26 +143,118 @@
 }
 
 .section-title {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-  color: #4b0082;
+  font-size: 2rem;
+  /* add comfortable spacing around section titles */
+  margin: 0.4rem 0 0.8rem 0;
+  padding: 0.25rem 0;
+  color: #3498db; /* primary blue (same as Sou Aluno) */
+}
+
+/* Tab titles just below the page title (e.g. Monitores / Conexões) */
+.tab-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+/* Box titles inside panels (e.g. Conexões, Seus pedidos) */
+.box-title {
+  font-size: 1.125rem;
+  /* use margin for external spacing (ideal for titles) */
+  margin: 0.625rem 0; /* increased 2.5x */
+  color: black;
+  font-weight: 700;
+  padding: 0;
+}
+
+.filters-button {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  float: right;
 }
 
 .monitor-list {
   list-style: none;
-  padding: 0;
-  margin: 0 auto;
-  max-width: 500px;
+  padding: 0 8px 0 0;
+  margin: 0;
+  width: 100%;
+  /* limitar a altura do bloco e permitir rolagem interna quando necessário */
+  max-height: 56vh;
+  overflow-y: auto;
   text-align: left;
   color: black;
 }
 
 .monitor-item {
   background: #f8f8ff;
-  padding: 10px 15px;
+  padding: 14px 18px;
   border-radius: 10px;
   margin-bottom: 10px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* layout em duas colunas: info do monitor à esquerda e disciplinas à direita */
+.monitor-item-grid {
+  display: grid;
+  /* dividir em 3 colunas: info principal | disciplinas (centro) | ações (direita) */
+  grid-template-columns: 1fr 260px 120px;
+  gap: 12px;
+  align-items: start;
+}
+
+.monitor-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.monitor-right {
+  background: rgba(52,152,219,0.03);
+  padding: 8px;
+  border-radius: 8px;
+  max-height: 180px;
+  overflow-y: auto;
+  border: 1px solid rgba(52,152,219,0.06);
+}
+
+.monitor-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+@media (max-width: 768px) {
+  .monitor-item-grid {
+    grid-template-columns: 1fr;
+  }
+  .monitor-right {
+    max-height: 220px;
+    margin-top: 8px;
+  }
+  .monitor-actions {
+    margin-top: 8px;
+    justify-content: flex-start;
+  }
+}
+
+.disciplina-item {
+  font-size: 0.9rem;
+  color: #333;
+  padding: 3px 0;
+  border-bottom: 1px dashed rgba(0,0,0,0.04);
+}
+
+.monitor-specialty {
+  font-size: 0.95rem;
+  color: #666;
+  margin-top: 4px;
+  font-style: italic;
 }
 
 .disciplinas-text {

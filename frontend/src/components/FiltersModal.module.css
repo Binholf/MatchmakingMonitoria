@@ -1,0 +1,102 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(6px);
+  z-index: 9999;
+}
+
+.modal {
+  width: 520px;
+  max-width: calc(100% - 40px);
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #e74c3c; /* vermelho para o botão de fechar */
+  font-weight: 700;
+}
+
+.close:hover {
+  color: #c0392b;
+}
+
+.header h3 {
+  margin: 0;
+  color: #3498db; /* use primary blue for title */
+  font-size: 1.1rem;
+}
+
+.help {
+  margin: 10px 0 14px 0;
+  color: #444;
+  font-size: 0.95rem;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px 0;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid #e6e6e6;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  background: #fafafa;
+}
+
+.handle {
+  font-size: 16px;
+  color: #777;
+}
+
+.label {
+  font-weight: 600;
+  color: #222;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.btn {
+  background: #27ae60;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.btnSecondary {
+  background: #f1c40f;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+}

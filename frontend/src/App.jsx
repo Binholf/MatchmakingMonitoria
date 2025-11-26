@@ -5,10 +5,11 @@ import Home from "./pages/Home";
 import PrivateRoute from "./components/PrivateRoute";
 import CadastroAluno from "./pages/CadastroAluno";
 import CadastroMonitor from "./pages/CadastroMonitor";
-import PerfilAluno from "./pages/PerfilAluno";
-import PerfilMonitor from "./pages/PerfilMonitor";
+import ErrorBoundary from "./components/ErrorBoundary";
+// perfil pages removed; profile editing moved into Aluno/Monitor pages
 import Aluno from  "./pages/Aluno";
 import Monitor from  "./pages/Monitor";
+import Header from "./components/Header";
 
 
 export default function App() {
@@ -16,6 +17,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route path="/" element={<Navigate to={token ? "/home" : "/login"} />} />
         <Route path="/login" element={<Login />} />
@@ -23,9 +25,15 @@ export default function App() {
         <Route path="/aluno" element={<Aluno />} />
         <Route path="/monitor" element={<Monitor />} />
         <Route path="/cadastro-aluno" element={<CadastroAluno />} />
-        <Route path="/cadastro-monitor" element={<CadastroMonitor />} />
-        <Route path="/perfil-aluno" element={<PerfilAluno />} />
-        <Route path="/perfil-monitor" element={<PerfilMonitor />} />
+        <Route
+          path="/cadastro-monitor"
+          element={
+            <ErrorBoundary>
+              <CadastroMonitor />
+            </ErrorBoundary>
+          }
+        />
+        {/* perfil routes removed - profile editing is now inside /aluno and /monitor pages */}
         <Route
           path="/home"
           element={

@@ -9,6 +9,7 @@ import disciplinasRoutes from "./routes/disciplinas.js";
 import alunoDisciplinasRoutes from "./routes/alunoDisciplinas.js";
 import monitorDisciplinasRoutes from "./routes/monitorDisciplinas.js";
 import matchRoutes from "./routes/match.js";
+import connectionsRoutes from "./routes/connections.js";
 
 dotenv.config();
 const app = express();
@@ -24,5 +25,6 @@ app.use("/disciplinas", disciplinasRoutes);
 app.use("/aluno", alunoDisciplinasRoutes);
 app.use("/monitor", monitorDisciplinasRoutes);
 app.use("/match", matchRoutes);
+app.use("/connections", connectionsRoutes);
 
 app.listen(3000, () => console.log("Servidor rodando na porta 3000"));

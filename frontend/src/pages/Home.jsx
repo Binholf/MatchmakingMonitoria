@@ -22,12 +22,6 @@ export default function Home() {
     };
     fetchUser();
   }, [navigate]);
-
-  const handleLogout = () => {
-    logout();
-    navigate("/login");
-  };
-
   const handleAlunoClick = async () => {
     try {
       const temCadastro = await verificarCadastroAluno();
@@ -52,15 +46,6 @@ export default function Home() {
 
   return (
     <div className={styles["home-page"]}>
-      <header className={styles["home-header"]}>
-        <h1 className={styles["welcome-text"]}>
-          Bem-vindo{user.name ? `, ${user.name}` : ""}!
-        </h1>
-        <button onClick={handleLogout} className={styles["logout-button"]}>
-          Sair
-        </button>
-      </header>
-
       <div className={styles["home-cards"]}>
         <div
           className={`${styles["role-card"]} ${styles["student-card"]}`}

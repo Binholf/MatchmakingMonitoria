@@ -24,10 +24,17 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
+  /* Use the normal block flow so app layout controls horizontal centering
+     via container max-widths; avoid forcing a centered flex context that
+     can introduce large empty areas on wide viewports. */
   min-width: 320px;
   min-height: 100vh;
+  width: 100%;
+}
+
+/* evitar quaisquer estouros horizontais que causem scroll indesejado */
+body, html {
+  overflow-x: hidden;
 }
 
 h1 {
@@ -65,4 +72,13 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+/* Ensure react-toastify toasts appear above modals/overlays */
+.Toastify__toast-container {
+  z-index: 12000 !important;
+}
+
+.Toastify__toast-container--top-center {
+  top: 12px !important;
 }

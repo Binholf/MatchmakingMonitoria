@@ -1,0 +1,126 @@
+.profile-page {
+  /* cover full viewport to avoid root background showing as a "black bar" */
+  min-height: 100vh;
+  width: 100%;
+  background-color: #e6eff6;
+  padding: 0.5rem 0.9rem;
+  padding-top: 80px; /* espaço para header (64px) + 16px gap */
+  box-sizing: border-box;
+}
+
+.profile-container {
+  max-width: 980px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 0.6rem;
+  align-items: start;
+  margin-top: 8px; /* small gap from top so panels never touch header */
+}
+
+.panel {
+  background: #fff;
+  border-radius: 8px;
+  padding: 0.5rem;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+  align-self: start;
+  /* top blue accent to match "Sou Aluno" design */
+  border-top: 6px solid #3498db;
+}
+
+/* variant for pages that should use purple accent (Monitor) */
+.panel--purple {
+  border-top: 6px solid #4b0082;
+}
+
+/* Garantir que elementos de formulário dentro do painel respeitem o box-sizing e não estoure */
+.panel input,
+.panel textarea,
+.panel select,
+.panel .control,
+.panel .wrapper {
+  box-sizing: border-box;
+  max-width: 100%;
+  width: 100%;
+}
+
+.profile-info h3 {
+  margin: 0 0 0.4rem 0;
+  font-size: 1rem;
+}
+
+.profile-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.4rem;
+  margin-bottom: 0.45rem;
+}
+
+.label {
+  color: #666;
+  font-size: 0.8rem;
+}
+
+.value {
+  color: #222;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.edit-controls {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+  justify-content: space-between;
+}
+
+.btn {
+  padding: 0.4rem 0.7rem;
+  border-radius: 7px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.btn-primary { background: #27ae60; color: white; }
+.btn-secondary { background: #f1c40f; color: #111; }
+.btn-danger { background: #e74c3c; color: white; }
+
+/* Right column content spacing */
+.right-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+/* Divider used to separate top personal info from interest-related info */
+.profile-divider {
+  width: 100%;
+  height: 1px;
+  background: #e6e6e6;
+  margin: 0.6rem 0;
+}
+
+/* Centered label + value layout for interest fields */
+.profile-centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0;
+}
+.profile-centered .label {
+  font-size: 0.85rem;
+  color: #666;
+}
+.profile-centered .value {
+  color: #222;
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .profile-container { grid-template-columns: 1fr; gap: 0.6rem; }
+  .profile-page { padding-top: 90px; }
+}
